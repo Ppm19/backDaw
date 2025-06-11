@@ -1,0 +1,108 @@
+# Backend API - Proyecto Final DAW
+
+Este repositorio contiene el código fuente de la API backend desarrollada para un proyecto de e-commerce. La API gestiona productos, usuarios y pedidos, proporcionando los endpoints necesarios para que una aplicación frontend pueda interactuar con la base de datos.
+
+El proyecto está construido con Node.js y Express, y se conecta a una base de datos MongoDB. Está configurado para un despliegue sencillo y eficiente en la plataforma Vercel.
+
+## Características Principales
+
+-   **Gestión de Productos:** Operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para los productos de la tienda.
+-   **Filtrado de Productos:** Permite obtener productos filtrados por categoría y marca.
+-   **Gestión de Usuarios:** Endpoints para el registro y manejo de usuarios (ampliable a autenticación).
+-   **Gestión de Pedidos:** Endpoints para la creación y seguimiento de pedidos.
+-   **Despliegue Sencillo:** Configurado para desplegarse automáticamente en Vercel.
+
+## Tecnologías Utilizadas
+
+-   **Backend:** [Node.js](https://nodejs.org/)
+-   **Framework:** [Express.js](https://expressjs.com/)
+-   **Base de Datos:** [MongoDB](https://www.mongodb.com/) con [Mongoose](https://mongoosejs.com/) como ODM.
+-   **Hosting/Despliegue:** [Vercel](https://vercel.com/)
+-   **Manejo de CORS:** Paquete `cors` de Express.
+-   **Variables de Entorno:** Paquete `dotenv`.
+
+---
+
+## Cómo Empezar
+
+Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno de desarrollo local.
+
+### Prerrequisitos
+
+-   Tener instalado [Node.js](https://nodejs.org/) (versión 16 o superior).
+-   Tener acceso a una base de datos de MongoDB (se recomienda [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) para obtener una cadena de conexión).
+
+### Instalación Local
+
+1.  **Clona el repositorio:**
+    ```bash
+    git clone <URL_DEL_REPOSITORIO>
+    ```
+
+2.  **Navega a la carpeta del proyecto:**
+    ```bash
+    cd backDaw
+    ```
+
+3.  **Instala las dependencias:**
+    ```bash
+    npm install
+    ```
+
+4.  **Configura las variables de entorno:**
+    -   Crea un archivo llamado `.env` en la raíz del proyecto.
+    -   Abre el archivo y añade la siguiente línea, reemplazando `<TU_CADENA_DE_CONEXION>` con tu propia cadena de conexión de MongoDB:
+        ```
+        MONGODB_URI=<TU_CADENA_DE_CONEXION>
+        ```
+
+5.  **Ejecuta el servidor:**
+    ```bash
+    npm start
+    ```
+
+El servidor se iniciará y estará escuchando en `http://localhost:3000`.
+
+---
+
+## Endpoints de la API
+
+La URL base para las peticiones en producción es `https://back-daw.vercel.app`.
+
+### Productos (`/api/productos`)
+
+| Método | Ruta                                  | Descripción                                                                 |
+| :----- | :------------------------------------ | :-------------------------------------------------------------------------- |
+| `GET`  | `/`                                   | Obtiene todos los productos. Permite filtros por query params.              |
+| `GET`  | `/:id`                                | Obtiene un producto específico por su ID.                                   |
+| `POST` | `/`                                   | Crea un nuevo producto.                                                     |
+| `PUT`  | `/:id`                                | Actualiza un producto existente por su ID.                                  |
+| `DELETE`|`/:id`                                | Elimina un producto por su ID.                                              |
+
+**Ejemplo de filtrado:** `GET /api/productos?categoria=movil&marca=xiaomi`
+
+### Usuarios (`/api/usuarios`)
+
+| Método | Ruta   | Descripción                  |
+| :----- | :----- | :--------------------------- |
+| `GET`  | `/`    | Obtiene todos los usuarios.  |
+| `POST` | `/`    | Crea un nuevo usuario.       |
+| ...    | ...    | (Otras rutas CRUD a añadir)  |
+
+### Pedidos (`/api/pedidos`)
+
+| Método | Ruta   | Descripción                |
+| :----- | :----- | :------------------------- |
+| `GET`  | `/`    | Obtiene todos los pedidos. |
+| `POST` | `/`    | Crea un nuevo pedido.      |
+| ...    | ...    | (Otras rutas CRUD a añadir)|
+
+---
+
+## Despliegue en Vercel
+
+Este proyecto está pre-configurado para Vercel gracias al archivo `vercel.json`.
+
+1.  **Conecta tu repositorio de Git** a tu cuenta de Vercel.
+2.  **Configura las variables de entorno:** En el panel de tu proyecto en Vercel, ve a `Settings` > `Environment Variables` y añade la variable `MONGODB_URI` con tu cadena de conexión de producción.
+3.  Vercel se encargará del resto, desplegando automáticamente cada vez que hagas `push` a la rama principal.
