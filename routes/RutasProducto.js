@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Producto = require('../model/producto'); // Ajusta la ruta si tu modelo está en otra carpeta
+const Producto = require('../model/Producto'); // Ajusta la ruta si tu modelo está en otra carpeta
 
 // **C**REATE: Crear un nuevo producto
 router.post('/', async (req, res) => {
