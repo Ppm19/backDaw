@@ -24,8 +24,6 @@ router.post('/', async (req, res) => {
 // **R**EAD: Obtener todos los productos
 router.get('/', async (req, res) => {
     try {
-        // Aquí podrías añadir filtros, paginación, ordenación, etc. si fuera necesario
-        // Ejemplo: const productos = await Producto.find({ categoria: req.query.categoria });
         const productos = await Producto.find();
         res.status(200).json(productos);
     } catch (error) {
