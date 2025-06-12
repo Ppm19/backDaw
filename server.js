@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const rutasUsuario = require('./routes/RutasUsuario');
 const rutasProducto = require('./routes/RutasProducto');
 const rutasPedido = require('./routes/RutasPedido');
+const rutasUpload = require('./routes/RutasUpload');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 app.use('/api/usuarios', rutasUsuario);
 app.use('/api/productos', rutasProducto);
 app.use('/api/pedidos', rutasPedido);
+app.use('/api/upload', rutasUpload);
 
 async function startServer() {
     try {
