@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Producto = require('../model/Producto'); // Ajusta la ruta si tu modelo está en otra carpeta
 
-// **C**REATE: Crear un nuevo producto
 router.post('/', async (req, res) => {
     try {
         const nuevoProducto = new Producto(req.body);
@@ -21,7 +20,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// **R**EAD: Obtener todos los productos
 router.get('/', async (req, res) => {
     try {
         const productos = await Producto.find();
@@ -31,7 +29,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// **R**EAD: Obtener un producto por ID
 router.get('/:id', async (req, res) => {
     try {
         const producto = await Producto.findById(req.params.id);
@@ -48,14 +45,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// **U**PDATE: Actualizar un producto por ID
-// Usaremos PUT para reemplazo completo o PATCH para actualizaciones parciales.
-// Este ejemplo usa PUT.
 router.put('/:id', async (req, res) => {
     try {
         const productoActualizado = await Producto.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,          // Devuelve el documento modificado
-            runValidators: true // Ejecuta las validaciones del esquema al actualizar
+            new: true,
+            runValidators: true 
         });
         if (!productoActualizado) {
             return res.status(404).json({ message: "Producto no encontrado para actualizar" });
@@ -76,7 +70,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// **D**ELETE: Eliminar un producto por ID
 router.delete('/:id', async (req, res) => {
     try {
         const productoEliminado = await Producto.findByIdAndDelete(req.params.id);
