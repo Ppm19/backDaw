@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('../model/Usuario');
+const bcrypt = require('bcryptjs');
 
 router.post('/', async (req, res) => {
     try {
@@ -38,14 +39,17 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-
-        const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        });
-        if (!usuarioActualizado) {
+        const usuario = await Usuario.findById(req.params.id);
+        if (!usuario) {
             return res.status(404).json({ message: "Usuario no encontrado para actualizar" });
         }
+
+        Object.keys(req.body).forEach(key => {
+            usuario[key] = req.body[key];
+        });
+
+        const usuarioActualizado = await usuario.save();
+
         res.status(200).json({ message: "Usuario actualizado exitosamente", usuario: usuarioActualizado });
     } catch (error) {
         if (error.code === 11000) {
@@ -81,7 +85,9 @@ router.post('/login', async (req, res) => {
         if (!usuario) {
             return res.status(401).json({ message: "Credenciales inválidas." });
         }
-        if (password !== usuario.password) {
+        
+        const esMatch = await bcrypt.compare(password, usuario.password);
+        if (!esMatch) {
             return res.status(401).json({ message: "Credenciales inválidas." });
         }
 
