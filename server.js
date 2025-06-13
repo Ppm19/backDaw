@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const allowedOrigins = [
-    'http://localhost:4200',
+    'https://front-daw-pwqq.vercel.app',
 ];
 
 const corsOptions = {
